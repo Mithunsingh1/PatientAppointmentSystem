@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3a6ae, #c9c8e1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .form-title {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: bold;
+            color: #5a4d6c;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2 class="form-title">Book Appointment</h2>
+
+    <!-- ✅ Success Notification -->
+    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span th:text="${successMessage}">Appointment booked successfully!</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <form th:action="@{/appointments/book}" method="post" th:object="${appointment}">
+        <div class="mb-3">
+            <label for="doctor" class="form-label">Select Doctor</label>
+            <select class="form-select" name="doctorId" id="doctor" required>
+                <option th:each="doc : ${doctors}" 
+                        th:value="${doc.id}" 
+                        th:text="${doc.username}">Doctor</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="datetime" class="form-label">Appointment Time</label>
+            <input type="datetime-local" name="datetime" id="datetime" class="form-control" required>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary w-100">Book Appointment</button>
+        </div>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
