@@ -72,11 +72,11 @@ public class AppointmentController {
         appointmentRepo.save(appointment);
 
         // ✅ Send confirmation email
-        emailService.sendAppointmentConfirmation(
-                patient.getEmail(),
-                patient.getUsername(),
-                appointment.getAppointmentTime().toString()
-        );
+        // emailService.sendAppointmentConfirmation(
+        //         patient.getEmail(),
+        //         patient.getUsername(),
+        //         appointment.getAppointmentTime().toString()
+        // );
 
         // ✅ Add success message and reset form
         model.addAttribute("successMessage", "✅ Appointment booked successfully and email sent!");
